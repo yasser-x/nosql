@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Members</title>
+</head>
+<body>
+    <h1>Members</h1>
+    <ul>
+        {% for member in members %}
+        <li>
+            <a href="{{ url_for('members.get_member', id=member._id) }}">{{ member.name }}</a>
+            <form action="{{ url_for('members.delete_member', id=member._id) }}" method="post" style="display:inline;">
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+    <form action="{{ url_for('members.add_member') }}" method="post">
+        <input type="text" name="name" placeholder="Name">
+        <input type="text" name="email" placeholder="Email">
+        <button type="submit">Add Member</button>
+    </form>
+</body>
+</html>

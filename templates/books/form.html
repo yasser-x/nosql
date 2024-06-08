@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ 'Edit' if book else 'Add' }} Book</title>
+</head>
+<body>
+    <h1>{{ 'Edit' if book else 'Add' }} Book</h1>
+    <form action="{{ url_for('books.update_book', id=book._id) if book else url_for('books.add_book') }}" method="post">
+        <input type="text" name="title" value="{{ book.title if book else '' }}" placeholder="Title">
+        <input type="text" name="author_id" value="{{ book.author_id if book else '' }}" placeholder="Author ID">
+        <button type="submit">{{ 'Update' if book else 'Add' }} Book</button>
+    </form>
+</body>
+</html>

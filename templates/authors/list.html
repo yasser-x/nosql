@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Authors</title>
+</head>
+<body>
+    <h1>Authors</h1>
+    <ul>
+        {% for author in authors %}
+        <li>
+            <a href="{{ url_for('authors.get_author', id=author['a']['id']) }}">{{ author['a']['name'] }}</a>
+            <form action="{{ url_for('authors.delete_author', id=author['a']['id']) }}" method="post" style="display:inline;">
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+    <form action="{{ url_for('authors.add_author') }}" method="post">
+        <input type="text" name="id" placeholder="ID">
+        <input type="text" name="name" placeholder="Name">
+        <button type="submit">Add Author</button>
+    </form>
+</body>
+</html>

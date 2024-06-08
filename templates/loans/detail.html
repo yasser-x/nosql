@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ loan.book_id }} borrowed by {{ loan.member_id }}</title>
+</head>
+<body>
+    <h1>{{ loan.book_id }} borrowed by {{ loan.member_id }}</h1>
+    <p>Loan Date: {{ loan.loan_date }}</p>
+    <form action="{{ url_for('loans.update_loan', id=loan._id) }}" method="post">
+        <input type="text" name="book_id" value="{{ loan.book_id }}">
+        <input type="text" name="member_id" value="{{ loan.member_id }}">
+        <input type="date" name="loan_date" value="{{ loan.loan_date }}">
+        <button type="submit">Update Loan</button>
+    </form>
+    <form action="{{ url_for('loans.delete_loan', id=loan._id) }}" method="post">
+        <button type="submit">Delete Loan</button>
+    </form>
+</body>
+</html>

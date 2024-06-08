@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ author['a']['name'] }}</title>
+</head>
+<body>
+    <h1>{{ author['a']['name'] }}</h1>
+    <form action="{{ url_for('authors.update_author', id=author['a']['id']) }}" method="post">
+        <input type="text" name="name" value="{{ author['a']['name'] }}">
+        <button type="submit">Update Author</button>
+    </form>
+    <form action="{{ url_for('authors.delete_author', id=author['a']['id']) }}" method="post">
+        <button type="submit">Delete Author</button>
+    </form>
+</body>
+</html>

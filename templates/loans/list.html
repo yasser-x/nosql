@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Loans</title>
+</head>
+<body>
+    <h1>Loans</h1>
+    <ul>
+        {% for loan in loans %}
+        <li>
+            <a href="{{ url_for('loans.get_loan', id=loan._id) }}">{{ loan.book_id }} borrowed by {{ loan.member_id }}</a>
+            <form action="{{ url_for('loans.delete_loan', id=loan._id) }}" method="post" style="display:inline;">
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+    <form action="{{ url_for('loans.add_loan') }}" method="post">
+        <input type="text" name="book_id" placeholder="Book ID">
+        <input type="text" name="member_id" placeholder="Member ID">
+        <input type="date" name="loan_date" placeholder="Loan Date">
+        <button type="submit">Add Loan</button>
+    </form>
+</body>
+</html>
