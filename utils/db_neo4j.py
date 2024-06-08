@@ -1,9 +1,8 @@
 from neo4j import GraphDatabase
-from config import Config
 
 class Neo4jDB:
     def __init__(self):
-        self.driver = GraphDatabase.driver(Config.NEO4J_URI, auth=(Config.NEO4J_USER, Config.NEO4J_PASSWORD))
+        self.driver = GraphDatabase.driver('bolt://3.84.16.168:7687', auth=("neo4j", "tempers-additive-retention"))
 
     def close(self):
         self.driver.close()

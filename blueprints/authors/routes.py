@@ -29,7 +29,7 @@ def get_author(id):
     author = neo4j_db.query(query, parameters)
     return render_template('authors/detail.html', author=author[0])
 
-@app.route('/authors/<id>', methods=['POST'])
+@authors_bp.route('/authors/<id>', methods=['POST'])
 def update_author(id):
     data = request.form.to_dict()
     query = """
@@ -43,7 +43,7 @@ def update_author(id):
     neo4j_db.query(query, parameters)
     return redirect(url_for('authors.get_author', id=id))
 
-@app.route('/authors/delete/<id>', methods=['POST'])
+@authors_bp.route('/authors/delete/<id>', methods=['POST'])
 def delete_author(id):
     query = """
     MATCH (a:Author {id: $id})
