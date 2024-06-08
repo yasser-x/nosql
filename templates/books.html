@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Books</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3e5d0; /* Light background color */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            color: #333; /* Dark text color */
+            text-shadow: none;
+            position: relative;
+        }
+
+        .background-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .background-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.5; /* Semi-transparent background image */
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: rgba(255, 255, 255, 0.8); /* Lighten sidebar */
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #e67e22; /* Orange text color */
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 20px;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #333; /* Dark text color */
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        .sidebar ul li a:hover {
+            color: #e67e22; /* Orange text on hover */
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 20px;
+            overflow-y: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .main-content h1 {
+            margin-bottom: 30px;
+            font-size: 36px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8); /* Lighten background */
+            padding: 15px 30px;
+            border-radius: 10px;
+            color: #e67e22; /* Orange text color */
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .books-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .book-card {
+            background-color: rgba(255, 255, 255, 0.9); /* Lighten background */
+            padding: 20px;
+            border-radius: 10px;
+            width: 250px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .book-card:hover {
+            transform: scale(1.05);
+        }
+
+        .book-card img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        .book-card p {
+            margin: 15px 0;
+            color: #333; /* Dark text color */
+        }
+    </style>
+</head>
+<body>
+    <div class="background-image">
+        <img src="https://images.unsplash.com/photo-1600431521340-491eca880813?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGxpYnJhcnl8ZW58MHx8MHx8fDA%3D" alt="Library Background">
+    </div>
+    <div class="sidebar">
+        <h2>Menu</h2>
+        <ul>
+            <li><a href="/">Accueil</a></li>
+            <li><a href="/books">Books</a></li>
+            <li><a href="/adherents/html">Adherents</a></li>
+            <li><a href="/prets/html">Prets</a></li>
+            <li><a href="/login">Login</a></li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <h1>Books</h1>
+        <div class="books-grid" id="books-list">
+            <!-- Book details will be added here via JavaScript -->
+        </div>
+    </div>
+    <script>
+        fetch('/api/books')
+            .then(response => response.json())
+            .then(data => {
+                const booksList = document.getElementById('books-list');
+                data.forEach(book => {
+                    const bookCard = document.createElement('div');
+                    bookCard.className = 'book-card';
+                    bookCard.innerHTML = `
+                        <img src="${book.image_url}" alt="${book.title}">
+                        <p><strong>Title:</strong> ${book.title}</p>
+                        <p><strong>Author:</strong> ${book.author}</p>
+                        <p><strong>ISBN:</strong> ${book.isbn}</p>
+                    `;
+                    booksList.appendChild(bookCard);
+                });
+            });
+    </script>
+</body>
+</html>
