@@ -27,6 +27,11 @@ def index():
 def books():
     return render_template('books.html')
 
+
+@app.route('/addbook/html')
+def addbookpage():
+    return render_template('addbook.html')
+
 # Route pour afficher les adhérents
 @app.route('/adherents/html')
 def adherents_page():

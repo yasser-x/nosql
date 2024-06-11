@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Book</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .navbar-custom {
+            background-color: #007bff; /* Bootstrap primary blue */
+        }
+        .navbar-custom .nav-link, .navbar-custom .navbar-brand {
+            color: #fff;
+        }
+        .main-content {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #f8f9fa;
+        }
+        .main-content h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .main-content form {
+            margin-bottom: 20px;
+        }
+        .main-content .input-group {
+            margin-bottom: 15px;
+        }
+        .main-content .input-group input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .main-content button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <a class="navbar-brand" href="/">Library</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse ml-auto" id="navbarNav">
+            <ul class="navbar-nav" style="margin-left: auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<div class="container">
+    <div class="main-content">
+        <h1>Add a New Book</h1>
+        <form id="book-form">
+            <div class="input-group">
+                <input type="text" id="title" placeholder="Title" class="form-control" required>
+            </div>
+            <div class="input-group">
+                <input type="text" id="author" placeholder="Author" class="form-control" required>
+            </div>
+            <div class="input-group">
+                <input type="text" id="isbn" placeholder="ISBN" class="form-control" required>
+            </div>
+            <div class="input-group">
+                <input type="text" id="genre" placeholder="Genre" class="form-control">
+            </div>
+            <div class="input-group">
+                <input type="date" id="published" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Add Book</button>
+        </form>
+    </div>
+</div>
+<script>
+    document.getElementById('book-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const title = document.getElementById('title').value;
+        const author = document.getElementById('author').value;
+        const isbn = document.getElementById('isbn').value;
+        const genre = document.getElementById('genre').value;
+        const published = document.getElementById('published').value;
+
+        fetch('/addBook', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ title, author, isbn, genre, published })
+        })
+        .then(response => response.json())
+        .then(() => {
+            alert('Book successfully added');
+            document.getElementById('book-form').reset();
+        })
+        .catch(error => console.error('Error adding book:', error));
+    });
+</script>
+</body>
+</html>

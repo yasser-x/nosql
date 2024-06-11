@@ -48,6 +48,9 @@
                         <a class="nav-link" href="{% if session.get('logged_in') %}{{ url_for('adherents_page') }}{% else %}{{ url_for('login_page') }}{% endif %}">Adherents</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{% if session.get('logged_in') %}{{ url_for('addbookpage') }}{% else %}{{ url_for('login_page') }}{% endif %}">Ajouts</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{% if session.get('logged_in') %}{{ url_for('prets') }}{% else %}{{ url_for('login_page') }}{% endif %}">Prets</a>
                     </li>
                     <li class="nav-item">
